@@ -49,16 +49,16 @@ function App() {
 
   return (
     <main className={`w-screen min-h-screen m-0 px-3 ${fontFamily} ${darkmode ? 'bg-[#050505] text-white' : 'bg-white text-[#2D2D2D]'}`}>
-      <Navbar {...{ toggleDarkmode, darkmode, toggleFont, fontFamily }} />
-      <SearchInput {...{ searchData, darkmode, onSubmitSearch, onChangeSearch }} />
-      {isLoading && <Loader />}
-      {data ? <>
-        <div className="m-0 max-w-[745px] mx-auto w-full">
+      <div className="m-0 max-w-[745px] mx-auto w-full">
+        <Navbar {...{ toggleDarkmode, darkmode, toggleFont, fontFamily }} />
+        <SearchInput {...{ searchData, darkmode, onSubmitSearch, onChangeSearch }} />
+        {isLoading && <Loader />}
+        {data ? <>
           <Word data={data} />
           <Meaning data={data.meanings} />
           <Source data={data.sourceUrls} />
-        </div>
-      </> : <Error />}
+        </> : <Error />}
+      </div>
     </main>
   )
 }
