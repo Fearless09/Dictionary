@@ -16,10 +16,10 @@ function App() {
   const [searchData, setSearchData] = useState('keyboard')
 
 
-  const fetchData = () => fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${searchData}`)
+  const fetchData = (data) => fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${data}`)
     .then(response => response.json())
     .then(response => {
-      console.log(response[0])
+      console.log(searchData)
       setIsLoading(false)
       setData(response[0])
     })
@@ -30,7 +30,7 @@ function App() {
 
   useEffect(() => {
     setIsLoading(true)
-    fetchData()
+    fetchData(searchData)
   }, [])
 
   const toggleDarkmode = () => setDarkmode(!darkmode)
@@ -42,7 +42,8 @@ function App() {
   const onSubmitSearch = e => {
     e.preventDefault()
     setIsLoading(true)
-    fetchData()
+    fetchData(searchData)
+    console.log('Target')
   }
 
 
@@ -50,12 +51,12 @@ function App() {
   return (
     <main className={`w-screen min-h-screen m-0 px-3 ${fontFamily} ${darkmode ? 'bg-[#050505] text-white' : 'bg-white text-[#2D2D2D]'}`}>
       <div className="m-0 max-w-[745px] mx-auto w-full">
-        <Navbar {...{ toggleDarkmode, darkmode, toggleFont, fontFamily }} />
+        <Navbar {...{ toggleDarkmode, darkmode, toggleFont, fontFamily, setSearchData, setIsLoading,fetchData }} />
         <SearchInput {...{ searchData, darkmode, onSubmitSearch, onChangeSearch }} />
         {isLoading && <Loader />}
         {data ? <>
-          <Word data={data} />
-          <Meaning data={data.meanings} />
+          <Word {... { data }} />
+          <Meaning data={data.meanings} {... { setSearchData, onSubmitSearch, setIsLoading, fetchData }} />
           <Source data={data.sourceUrls} />
         </> : <Error />}
       </div>

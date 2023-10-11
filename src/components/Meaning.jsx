@@ -1,7 +1,16 @@
 import React from 'react'
 import { BsDot } from 'react-icons/bs'
 
-function Meaning({ data }) {
+function Meaning({ data, setSearchData, onSubmitSearch, setIsLoading, fetchData }) {
+    function onSynonymsClick(data) {
+        scrollTo({
+            behavior: 'smooth',
+            top: 0
+        })
+        setSearchData(data)
+        setIsLoading(true)
+        fetchData(data)
+    }
     return (
         <>
             {data && data.map((meaning, index) => (
@@ -10,7 +19,7 @@ function Meaning({ data }) {
                     {meaning.synonyms.length > 0 &&
                         < div className="mt-10 flex flex-wrap gap-x-5 gap-y text-xl">
                             <h6 className='text-[#757575] font-normal'>Synonyms</h6>
-                            {meaning.synonyms.map((synonym, synIndex) => <h6 key={synIndex} className='font-bold text-[#A445ED] underline'>{synonym}</h6>)}
+                            {meaning.synonyms.map((synonym, synIndex) => <a onClick={() => onSynonymsClick(synonym)} key={synIndex} className='font-bold cursor-pointer text-[#A445ED] underline'>{synonym}</a>)}
                         </div >
                     }
 
@@ -18,7 +27,7 @@ function Meaning({ data }) {
                     {meaning.antonyms.length > 0 &&
                         < div className="mt-10 flex flex-wrap gap-x-5 gap-y text-xl">
                             <h6 className='text-[#757575] font-normal'>Antonyms</h6>
-                            {meaning.antonyms.map((antonym, antyIndex) => <h6 key={antyIndex} className='font-bold underline text-[#A445ED]'>{antonym}</h6>)}
+                            {meaning.antonyms.map((antonym, antyIndex) => <a onClick={() => onSynonymsClick(antonym)} key={antyIndex} className='font-bold underline cursor-pointer text-[#A445ED]'>{antonym}</a>)}
 
                         </div >
                     }

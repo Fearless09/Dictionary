@@ -8,7 +8,7 @@ function Word({ data }) {
     return (
         <div className='mt-[45px] flex gap-4 items-center justify-between'>
             <span>
-                <h1 className='text-[64px] font-bold'>{data.word}</h1>
+                <h1 className='text-[50px] sm:text-[64px] font-bold'>{data.word}</h1>
                 <p className='text-2xl font-normal text-[#A445ED]'>{data.phonetics?.length > 0 && data.phonetics[0]?.text}</p>
             </span>
 

@@ -1,12 +1,22 @@
 import React from 'react'
 import BookSVG from './SVGs/BookSVG'
-import { FaMoon, FaRegMoon } from 'react-icons/fa6'
+import { FaRegMoon } from 'react-icons/fa6'
 
-function Navbar({ toggleDarkmode, darkmode, toggleFont, fontFamily }) {
+function Navbar({ toggleDarkmode, darkmode, toggleFont, fontFamily, setSearchData, setIsLoading, fetchData }) {
+    function onHomeClick(e) {
+        scrollTo({
+            behavior: 'smooth',
+            top: 0
+        })
+        setSearchData('a')
+        setIsLoading(true)
+        fetchData('a')
+    }
+
     return (
         <nav className='flex justify-between items-center gap-4 pt-14'>
             {/* Book Icon */}
-            <button>
+            <button onClick={onHomeClick}>
                 <BookSVG />
             </button>
 
