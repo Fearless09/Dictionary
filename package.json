@@ -1,6 +1,7 @@
 {
   "name": "dictionary",
   "private": true,
+  "description": "'Dictionary' is a user-friendly online platform developed with React and Vite, designed to empower users with a quick and efficient way to explore and expand their vocabulary. With seamless integration of the DictionaryAPI, this website provides instant access to a wealth of word meanings, pronunciations, synonyms, antonyms, and more. Whether you're a student, a writer, or simply curious about language, 'Dictionary' offers a convenient and comprehensive tool for enhancing your understanding of words and expressions. Discover the world of words at your fingertips with the 'Dictionary' website.",
   "version": "0.0.0",
   "homepage": "https://Fearless09.github.io/Dictionary",
   "type": "module",
