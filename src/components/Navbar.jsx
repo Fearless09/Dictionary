@@ -16,7 +16,7 @@ function Navbar({ toggleDarkmode, darkmode, toggleFont, fontFamily, setSearchDat
     return (
         <nav className='flex justify-between items-center gap-4 pt-14'>
             {/* Book Icon */}
-            <button onClick={onHomeClick}>
+            <button className='active:scale-[0.98]' onClick={onHomeClick}>
                 <BookSVG />
             </button>
 
