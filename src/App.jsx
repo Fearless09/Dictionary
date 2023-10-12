@@ -48,7 +48,7 @@ function App() {
 
 
   return (
-    <main className={`w-screen min-h-screen m-0 px-3 ${fontFamily} ${darkmode ? 'bg-[#050505] text-white' : 'bg-white text-[#2D2D2D]'}`}>
+    <main className={`w-full min-h-screen m-0 px-3 ${fontFamily} ${darkmode ? 'bg-[#050505] text-white' : 'bg-white text-[#2D2D2D]'}`}>
       <div className="m-0 max-w-[745px] mx-auto w-full">
         <Navbar {...{ toggleDarkmode, darkmode, toggleFont, fontFamily, setSearchData, setIsLoading, fetchData }} />
         <SearchInput {...{ searchData, darkmode, onSubmitSearch, onChangeSearch }} />
