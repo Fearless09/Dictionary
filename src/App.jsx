@@ -19,7 +19,7 @@ function App() {
   const fetchData = (data) => fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${data}`)
     .then(response => response.json())
     .then(response => {
-      console.log(searchData)
+      console.log(response[0])
       setIsLoading(false)
       setData(response[0])
     })
@@ -43,7 +43,6 @@ function App() {
     e.preventDefault()
     setIsLoading(true)
     fetchData(searchData)
-    console.log('Target')
   }
 
 
@@ -51,14 +50,14 @@ function App() {
   return (
     <main className={`w-screen min-h-screen m-0 px-3 ${fontFamily} ${darkmode ? 'bg-[#050505] text-white' : 'bg-white text-[#2D2D2D]'}`}>
       <div className="m-0 max-w-[745px] mx-auto w-full">
-        <Navbar {...{ toggleDarkmode, darkmode, toggleFont, fontFamily, setSearchData, setIsLoading,fetchData }} />
+        <Navbar {...{ toggleDarkmode, darkmode, toggleFont, fontFamily, setSearchData, setIsLoading, fetchData }} />
         <SearchInput {...{ searchData, darkmode, onSubmitSearch, onChangeSearch }} />
         {isLoading && <Loader />}
         {data ? <>
           <Word {... { data }} />
           <Meaning data={data.meanings} {... { setSearchData, onSubmitSearch, setIsLoading, fetchData }} />
           <Source data={data.sourceUrls} />
-        </> : <Error />}
+        </> : <Error {...{ searchData }} />}
       </div>
     </main>
   )
