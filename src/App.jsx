@@ -16,17 +16,20 @@ function App() {
   const [searchData, setSearchData] = useState('keyboard')
 
 
-  const fetchData = (data) => fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${data}`)
-    .then(response => response.json())
-    .then(response => {
-      console.log(response[0])
-      setIsLoading(false)
-      setData(response[0])
-    })
-    .catch(err => {
-      setIsLoading(false)
-      console.log('Error', err)
-    })
+  const fetchData = (data) => {
+    setIsLoading(true)
+    fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${data}`)
+      .then(response => response.json())
+      .then(response => {
+        console.log(response[0])
+        setIsLoading(false)
+        setData(response[0])
+      })
+      .catch(err => {
+        setIsLoading(false)
+        console.log('Error', err)
+      })
+  }
 
   useEffect(() => {
     setIsLoading(true)
@@ -35,14 +38,16 @@ function App() {
 
   const toggleDarkmode = () => setDarkmode(!darkmode)
   const toggleFont = e => setFontFamily(e.target.value)
-  const onChangeSearch = e => setSearchData(e.target.value)
+  const onChangeSearch = e => {
+    setSearchData(e.target.value)
+    fetchData(e.target.value)
+  }
 
 
 
   const onSubmitSearch = e => {
     e.preventDefault()
-    setIsLoading(true)
-    fetchData(searchData)
+    fetchData(Array.from(e.target.children)[0].defaultValue)
   }
 
 
