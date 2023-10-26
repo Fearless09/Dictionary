@@ -18,10 +18,11 @@ function App() {
 
   const fetchData = (data) => {
     setIsLoading(true)
+    setData()
     fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${data}`)
       .then(response => response.json())
       .then(response => {
-        console.log(response[0])
+        // console.log(response[0])
         setIsLoading(false)
         setData(response[0])
       })
@@ -48,6 +49,7 @@ function App() {
   const onSubmitSearch = e => {
     e.preventDefault()
     fetchData(Array.from(e.target.children)[0].defaultValue)
+    console.log(Array.from(e.target.children)[0].defaultValue)
   }
 
 
